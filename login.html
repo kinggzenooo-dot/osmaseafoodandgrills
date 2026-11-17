@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Osman's Seafoods and Grill — Secure Sign In & Role Portal</title>
+  <meta name="description" content="Sign in to Osman's Seafoods and Grill. Dedicated portal for Customers, Staff POS & Kitchen KDS, and Management.">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <style>
+    .login-page-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      background: radial-gradient(circle at 50% 20%, #16263B 0%, #0B192C 60%, #050B14 100%);
+      position: relative;
+    }
+
+    .login-glow-circle {
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 101, 0, 0.12) 0%, transparent 70%);
+      top: 15%;
+      pointer-events: none;
+    }
+
+    .back-storefront-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #94A3B8;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      transition: color 0.2s;
+    }
+
+    .back-storefront-link:hover {
+      color: var(--color-flame-amber);
+    }
+  </style>
+</head>
+<body class="staff-body" style="background:#0B192C;">
+
+  <div class="login-page-container">
+    <div class="login-glow-circle"></div>
+
+    <a href="index.html" class="back-storefront-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Return to Restaurant Storefront
+    </a>
+
+    <!-- Embedded Auth Card -->
+    <div class="auth-card" style="box-shadow: 0 30px 70px rgba(0,0,0,0.6), 0 0 40px rgba(255,101,0,0.2);">
+      <div class="auth-card-banner"></div>
+      
+      <div class="auth-header">
+        <div class="auth-logo">
+          <div class="auth-logo-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          </div>
+          <div class="auth-logo-text">
+            OSMAN'S
+            <span>SEAFOODS & GRILL</span>
+          </div>
+        </div>
+        <p class="auth-subtitle" id="pageAuthSubtitle">Unified Access Portal for Customers, Staff & Admins</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab-btn active" data-tab="login">Sign In</button>
+        <button class="auth-tab-btn" data-tab="register">Register</button>
+        <button class="auth-tab-btn tab-pin" data-tab="pin">Staff PIN</button>
+      </div>
+
+      <div class="auth-body">
+        <div id="pageAuthAlert" class="auth-alert"></div>
+
+        <!-- FORM: SIGN IN -->
+        <form id="pageLoginForm" class="auth-form-view active">
+          <div class="auth-group">
+            <label class="auth-label">Email Address</label>
+            <div class="auth-input-wrapper">
+              <svg class="auth-input-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <input type="email" id="pLoginEmail" class="auth-input" placeholder="e.g. admin@osmanseafoods.com" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="auth-group">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <label class="auth-label" style="margin-bottom:0;">Password</label>
+              <span style="font-size:0.75rem; color:#94A3B8;">Case-sensitive</span>
+            </div>
+            <div class="auth-input-wrapper">
+              <svg class="auth-input-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+              <input type="password" id="pLoginPassword" class="auth-input" placeholder="••••••••" required autocomplete="current-password">
+              <button type="button" class="auth-password-toggle" data-target="pLoginPassword">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="auth-submit-btn" id="pLoginSubmitBtn">
+            <span>Sign In to System</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          </button>
+        </form>
+
+        <!-- FORM: REGISTER -->
+        <form id="pageRegisterForm" class="auth-form-view">
+          <div class="auth-group">
+            <label class="auth-label">Full Name</label>
+            <div class="auth-input-wrapper">
+              <svg class="auth-input-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              <input type="text" id="pRegName" class="auth-input" placeholder="e.g. Elena Rostova" required>
+            </div>
+          </div>
+
+          <div class="auth-group">
+            <label class="auth-label">Email Address</label>
+            <div class="auth-input-wrapper">
+              <svg class="auth-input-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <input type="email" id="pRegEmail" class="auth-input" placeholder="name@example.com" required>
+            </div>
+          </div>
+
+          <div class="auth-group">
+            <label class="auth-label">Phone Number</label>
+            <div class="auth-input-wrapper">
+              <svg class="auth-input-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              <input type="tel" id="pRegPhone" class="auth-input" placeholder="+1 (555) 948-2019" required>
+            </div>
+          </div>
+
+          <div class="auth-group">
+            <label class="auth-label">Password</label>
+            <div class="auth-input-wrapper">
+              <svg class="auth-input-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+              <input type="password" id="pRegPassword" class="auth-input" placeholder="At least 6 characters" required minlength="6">
+              <button type="button" class="auth-password-toggle" data-target="pRegPassword">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="auth-submit-btn" id="pRegSubmitBtn">
+            <span>Create Account & Join</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+          </button>
+        </form>
+
+        <!-- FORM: STAFF PIN -->
+        <div id="pagePinForm" class="auth-form-view">
+          <div class="pin-pad-container">
+            <p style="font-size:0.85rem; color:#94A3B8; text-align:center;">
+              Enter your assigned 4-digit Staff Station PIN to unlock.
+            </p>
+
+            <div class="pin-display-dots" id="pPinDisplayDots">
+              <div class="pin-dot"></div>
+              <div class="pin-dot"></div>
+              <div class="pin-dot"></div>
+              <div class="pin-dot"></div>
+            </div>
+
+            <div class="pin-keypad">
+              <button class="pin-key" data-num="1">1</button>
+              <button class="pin-key" data-num="2">2</button>
+              <button class="pin-key" data-num="3">3</button>
+              <button class="pin-key" data-num="4">4</button>
+              <button class="pin-key" data-num="5">5</button>
+              <button class="pin-key" data-num="6">6</button>
+              <button class="pin-key" data-num="7">7</button>
+              <button class="pin-key" data-num="8">8</button>
+              <button class="pin-key" data-num="9">9</button>
+              <button class="pin-key key-action" id="pPinClearBtn">CLEAR</button>
+              <button class="pin-key" data-num="0">0</button>
+              <button class="pin-key key-action" id="pPinBackspaceBtn">⌫</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1-CLICK DEMO ROLES -->
+        <div class="demo-accounts-section">
+          <div class="demo-title">⚡ Instant 1-Click Role Switcher</div>
+          <div class="demo-pills" id="pageDemoPills"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let pagePin = '';
+      const alertEl = document.getElementById('pageAuthAlert');
+
+      function showPageAlert(msg, type = 'error') {
+        alertEl.textContent = msg;
+        alertEl.className = `auth-alert show ${type}`;
+      }
+
+      function clearPageAlert() {
+        alertEl.textContent = '';
+        alertEl.className = 'auth-alert';
+      }
+
+      // Check URL parameters for tab and redirect
+      const urlParams = new URLSearchParams(window.location.search);
+      const reqTab = urlParams.get('tab') || 'login';
+      const redirect = urlParams.get('redirect') || '';
+
+      const tabs = document.querySelectorAll('.auth-tabs .auth-tab-btn');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          tabs.forEach(t => t.classList.remove('active'));
+          e.currentTarget.classList.add('active');
+
+          const tName = e.currentTarget.getAttribute('data-tab');
+          document.querySelectorAll('.auth-form-view').forEach(v => v.classList.remove('active'));
+
+          if (tName === 'login') {
+            document.getElementById('pageLoginForm').classList.add('active');
+            document.getElementById('pageAuthSubtitle').textContent = 'Sign in with your email & password';
+          } else if (tName === 'register') {
+            document.getElementById('pageRegisterForm').classList.add('active');
+            document.getElementById('pageAuthSubtitle').textContent = 'Create a customer dining account';
+          } else if (tName === 'pin') {
+            document.getElementById('pagePinForm').classList.add('active');
+            document.getElementById('pageAuthSubtitle').textContent = 'Staff 4-digit POS & KDS terminal access';
+            pagePin = '';
+            updatePagePinDots();
+          }
+          clearPageAlert();
+        });
+      });
+
+      // Activate initial tab
+      const initTabBtn = document.querySelector(`.auth-tabs .auth-tab-btn[data-tab="${reqTab}"]`);
+      if (initTabBtn) initTabBtn.click();
+
+      // Password toggle
+      document.querySelectorAll('.auth-password-toggle').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const target = document.getElementById(e.currentTarget.getAttribute('data-target'));
+          if (target) target.type = target.type === 'password' ? 'text' : 'password';
+        });
+      });
+
+      // Demo Pills
+      const demoContainer = document.getElementById('pageDemoPills');
+      const accounts = window.OsmanAuth.getDemoAccounts();
+      demoContainer.innerHTML = accounts.map(acc => `
+        <button class="demo-pill ${acc.role === 'admin' ? 'pill-admin' : ''}" data-email="${acc.email}" data-pwd="${acc.password}">
+          ${acc.label}
+        </button>
+      `).join('');
+
+      demoContainer.querySelectorAll('.demo-pill').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          const email = e.currentTarget.getAttribute('data-email');
+          const pwd = e.currentTarget.getAttribute('data-pwd');
+          showPageAlert('Signing in as ' + email + '...', 'success');
+          const res = await window.OsmanAuth.login(email, pwd);
+          if (res.success) {
+            showPageAlert(res.message, 'success');
+            setTimeout(() => performRedirect(res.user), 600);
+          } else {
+            showPageAlert(res.error, 'error');
+          }
+        });
+      });
+
+      // Sign In Submit
+      document.getElementById('pageLoginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('pLoginEmail').value;
+        const password = document.getElementById('pLoginPassword').value;
+        const submitBtn = document.getElementById('pLoginSubmitBtn');
+
+        submitBtn.disabled = true;
+        submitBtn.querySelector('span').textContent = 'Signing In...';
+
+        const res = await window.OsmanAuth.login(email, password);
+        submitBtn.disabled = false;
+        submitBtn.querySelector('span').textContent = 'Sign In to System';
+
+        if (res.success) {
+          showPageAlert(res.message, 'success');
+          setTimeout(() => performRedirect(res.user), 600);
+        } else {
+          showPageAlert(res.error, 'error');
+        }
+      });
+
+      // Register Submit
+      document.getElementById('pageRegisterForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('pRegName').value.trim();
+        const email = document.getElementById('pRegEmail').value.trim();
+        const phone = document.getElementById('pRegPhone').value.trim();
+        const password = document.getElementById('pRegPassword').value;
+        const submitBtn = document.getElementById('pRegSubmitBtn');
+
+        submitBtn.disabled = true;
+        submitBtn.querySelector('span').textContent = 'Creating Account...';
+
+        const res = await window.OsmanAuth.register({ name, email, phone, password, role: 'customer' });
+        submitBtn.disabled = false;
+        submitBtn.querySelector('span').textContent = 'Create Account & Join';
+
+        if (res.success) {
+          showPageAlert(res.message, 'success');
+          setTimeout(() => performRedirect(res.user), 600);
+        } else {
+          showPageAlert(res.error, 'error');
+        }
+      });
+
+      // PIN Pad
+      document.querySelectorAll('#pagePinForm .pin-key[data-num]').forEach(key => {
+        key.addEventListener('click', (e) => {
+          if (pagePin.length < 4) {
+            pagePin += e.currentTarget.getAttribute('data-num');
+            updatePagePinDots();
+            if (pagePin.length === 4) {
+              submitPagePin();
+            }
+          }
+        });
+      });
+
+      document.getElementById('pPinClearBtn').addEventListener('click', () => {
+        pagePin = '';
+        updatePagePinDots();
+        clearPageAlert();
+      });
+
+      document.getElementById('pPinBackspaceBtn').addEventListener('click', () => {
+        if (pagePin.length > 0) {
+          pagePin = pagePin.slice(0, -1);
+          updatePagePinDots();
+        }
+      });
+
+      function updatePagePinDots() {
+        const dots = document.querySelectorAll('#pPinDisplayDots .pin-dot');
+        dots.forEach((dot, idx) => {
+          if (idx < pagePin.length) dot.classList.add('filled');
+          else dot.classList.remove('filled');
+        });
+      }
+
+      async function submitPagePin() {
+        showPageAlert('Verifying PIN...', 'success');
+        const res = await window.OsmanAuth.pinLogin(pagePin);
+        if (res.success) {
+          showPageAlert(res.message, 'success');
+          setTimeout(() => performRedirect(res.user), 600);
+        } else {
+          showPageAlert(res.error, 'error');
+          setTimeout(() => {
+            pagePin = '';
+            updatePagePinDots();
+          }, 900);
+        }
+      }
+
+      function performRedirect(user) {
+        if (redirect) {
+          window.location.href = redirect;
+          return;
+        }
+        if (user.role === 'admin') {
+          window.location.href = 'admin.html';
+        } else if (user.role === 'staff') {
+          window.location.href = 'staff.html';
+        } else {
+          window.location.href = 'index.html';
+        }
+      }
+    });
+  </script>
+</body>
+</html>

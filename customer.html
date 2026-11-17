@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Osman's Seafoods and Grill — Coastal Dining & Flame-Grilled Delicacies</title>
+  <meta name="description" content="Experience authentic oceanic seafood platters, wood-fired charcoal grilled steaks, and prime coastal dining at Osman's Seafoods and Grill. Order online for Dine-In, Takeout, or Hot Delivery.">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/customer.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo">
+        <div class="brand-logo-icon">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        </div>
+        <div class="brand-title">
+          OSMAN'S
+          <span>SEAFOODS & GRILL</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li><a href="#story" class="nav-link">Our Story</a></li>
+        <li><a href="#signature" class="nav-link">Signatures</a></li>
+        <li><a href="#menu" class="nav-link">Menu & Order</a></li>
+        <li><a href="#offers" class="nav-link">Offers</a></li>
+        <li><a href="#gallery" class="nav-link">Gallery</a></li>
+        <li><a href="#reserve" class="nav-link">Reservations</a></li>
+        <li><a href="#contact" class="nav-link">Location</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="navTrackerBtn" class="tracker-btn">
+          <span class="pulse-dot" id="navTrackerPulse" style="display:none;"></span>
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Track Order
+        </button>
+
+        <button id="navCartBtn" class="cart-btn">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+          <span>Cart</span>
+          <span class="cart-badge" id="navCartBadge">0</span>
+        </button>
+
+        <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="hero-overlay-flame"></div>
+    <div class="container hero-content">
+      <div class="hero-tag">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        Premier Coastal Dining Experience
+      </div>
+      <h1 class="hero-title">Where <em>Oceanic Catch</em> Meets Flame Grill Mastery</h1>
+      <p class="hero-subtitle">Savor daily harvested Atlantic lobsters, tiger prawns, and white-oak wood char-broiled prime steaks crafted by Chef Osman. Available for dining on our coastal terrace or hot delivery right to your door.</p>
+      
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-flame">Explore Coastal Menu</a>
+        <a href="#reserve" class="btn btn-navy">Book a Table</a>
+      </div>
+
+      <div class="hero-features">
+        <div class="hero-feature-item">
+          <div class="hero-feature-icon">⭐</div>
+          <div class="hero-feature-text">
+            <strong>4.9 / 5.0 Rating</strong>
+            <span>Over 1,200+ Verified Diners</span>
+          </div>
+        </div>
+        <div class="hero-feature-item">
+          <div class="hero-feature-icon">🔥</div>
+          <div class="hero-feature-text">
+            <strong>Oak Wood Charcoal</strong>
+            <span>Authentic Smoke & Searing</span>
+          </div>
+        </div>
+        <div class="hero-feature-item">
+          <div class="hero-feature-icon">⚡</div>
+          <div class="hero-feature-text">
+            <strong>30-Min Hot Delivery</strong>
+            <span>Thermal Insulated Dispatch</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story & Heritage Section -->
+  <section id="story" class="section-padding story-section">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80" alt="Chef Osman at the grill" class="story-img-main">
+          <div class="story-img-badge">
+            <strong>25+</strong>
+            <span>Years of Culinary Passion</span>
+          </div>
+        </div>
+        <div class="story-content">
+          <span class="section-subtitle">Our Heritage & Craft</span>
+          <h2>A Passion Born from Ocean Waves & Charcoal Fire</h2>
+          <p>Founded by Master Chef Osman Al-Mansoor, our restaurant brings together the rich bounties of the Pacific waters and the time-honored tradition of wood-fired open hearth grilling.</p>
+          <p>We source all seafood directly from certified sustainable coastal fishermen every morning. Every marinade is prepared from scratch with whole herbs, sea salt, and smoked chilies.</p>
+          
+          <div class="story-highlights">
+            <div class="story-card">
+              <h4>🌊 Fresh Catch Daily</h4>
+              <p>Delivered daily at dawn directly from Harbor Bay docks.</p>
+            </div>
+            <div class="story-card">
+              <h4>🔥 Oak Wood Charcoal</h4>
+              <p>High-heat white oak char searing for unmatched flavor depth.</p>
+            </div>
+            <div class="story-card">
+              <h4>🧈 Signature Cajun Butter</h4>
+              <p>Artisanal infused garlic butter blend crafted in-house.</p>
+            </div>
+            <div class="story-card">
+              <h4>🍷 Coastal Ambiance</h4>
+              <p>Panoramic terrace dining overlooking harbor sunsets.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signature Delicacies Showcase -->
+  <section id="signature" class="section-padding signature-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">Handpicked Culinary Highlights</span>
+        <h2 class="section-title">Chef Osman’s Signature Creations</h2>
+        <p class="section-desc">Experience our most celebrated seafood buckets and prime grill selections.</p>
+      </div>
+
+      <div class="signature-grid">
+        <div class="sig-card">
+          <div class="sig-img-box">
+            <img src="https://images.unsplash.com/photo-1559737194-67e3c1a84f37?auto=format&fit=crop&w=800&q=80" alt="Grand Seafood Bucket">
+            <span class="sig-price">$68.00</span>
+          </div>
+          <div class="sig-content">
+            <span class="badge badge-flame">Chef Special</span>
+            <h3>Grand Seafood Bucket</h3>
+            <p>Whole Atlantic Lobster, Jumbo Tiger Prawns, Snow Crab Legs, Sweet Corn, and Smoked Sausage tossed in signature Cajun Garlic Butter.</p>
+            <div class="sig-footer">
+              <span style="font-size:0.85rem; color:var(--color-gold-accent);">Prep Time: 25 mins</span>
+              <a href="#menu" class="btn btn-flame btn-sm">Order Dish</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sig-card">
+          <div class="sig-img-box">
+            <img src="https://images.unsplash.com/photo-1551248429-40975aa4de74?auto=format&fit=crop&w=800&q=80" alt="Char-Grilled Lobster Tail">
+            <span class="sig-price">$42.00</span>
+          </div>
+          <div class="sig-content">
+            <span class="badge badge-gold">Flame-Broiled</span>
+            <h3>Char-Grilled Lobster Tail</h3>
+            <p>Wood-fired 10oz Atlantic Lobster Tail basted with lemon garlic herb butter, served with charred asparagus and roasted lemon.</p>
+            <div class="sig-footer">
+              <span style="font-size:0.85rem; color:var(--color-gold-accent);">Prep Time: 20 mins</span>
+              <a href="#menu" class="btn btn-flame btn-sm">Order Dish</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sig-card">
+          <div class="sig-img-box">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Flame-Kissed Prime Ribeye">
+            <span class="sig-price">$38.00</span>
+          </div>
+          <div class="sig-content">
+            <span class="badge badge-flame">Prime Meat</span>
+            <h3>Flame-Kissed Prime Ribeye</h3>
+            <p>14oz Prime Angus Ribeye seared over white oak charcoal, finished with chimichurri butter and smoked sea salt flake.</p>
+            <div class="sig-footer">
+              <span style="font-size:0.85rem; color:var(--color-gold-accent);">Prep Time: 22 mins</span>
+              <a href="#menu" class="btn btn-flame btn-sm">Order Dish</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Menu & Ordering Section -->
+  <section id="menu" class="section-padding menu-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">Explore & Customize</span>
+        <h2 class="section-title">Our Full Restaurant Menu</h2>
+        <p class="section-desc">Select dishes to customize options, add to cart, and place your order online.</p>
+      </div>
+
+      <div class="menu-search-bar">
+        <svg class="icon" style="color:var(--color-text-muted);" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" id="menuSearchInput" placeholder="Search dishes (e.g., Lobster, Prawns, Ribeye, Paella)...">
+      </div>
+
+      <div class="category-filter-bar" id="categoryFilterBar"></div>
+      <div class="menu-grid" id="menuGrid"></div>
+    </div>
+  </section>
+
+  <!-- Special Offers & Platters Banner -->
+  <section id="offers" class="section-padding" style="background: linear-gradient(135deg, var(--color-flame-ember) 0%, var(--color-ocean-deep) 100%); color:#FFF;">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap;">
+      <div>
+        <span class="badge badge-gold" style="margin-bottom:0.75rem;">Limited-Time Combo Special</span>
+        <h2 style="font-size:2.8rem; font-family:var(--font-heading); margin-bottom:1rem;">The Royal Captain's Seafood Feast</h2>
+        <p style="max-width:600px; font-size:1.1rem; opacity:0.9;">Includes 1x Grand Seafood Bucket, 2x Ocean Breeze Cocktails, 1x Truffle Parmesan Fries, and 1x Key Lime Pie for only <strong>$89.99</strong> (Save $20!). Use code <code style="background:rgba(255,255,255,0.2); padding:0.2rem 0.6rem; border-radius:4px;">OSMAN10</code> at checkout.</p>
+      </div>
+      <a href="#menu" class="btn btn-flame" style="background:#FFF; color:var(--color-ocean-deep);">Claim Combo Offer</a>
+    </div>
+  </section>
+
+  <!-- Photo & Ambiance Gallery -->
+  <section id="gallery" class="section-padding gallery-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">Visual Experience</span>
+        <h2 class="section-title">Restaurant Ambiance & Kitchen Fire</h2>
+        <p class="section-desc">A glimpse inside Osman's Seafoods and Grill.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Dining Room Vibe">
+          <div class="gallery-overlay"><span>Main Dining Hall</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Flame Charcoal Grill">
+          <div class="gallery-overlay"><span>Wood-Fired Hearth</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1559737194-67e3c1a84f37?auto=format&fit=crop&w=800&q=80" alt="Fresh Seafood Bucket">
+          <div class="gallery-overlay"><span>Seafood Platter</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80" alt="Craft Cocktails">
+          <div class="gallery-overlay"><span>Coastal Bar</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Table Reservation Section -->
+  <section id="reserve" class="section-padding reservation-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle" style="color:var(--color-gold-accent);">Book Your Experience</span>
+        <h2 class="section-title" style="color:#FFF;">Reserve a Coastal Table</h2>
+        <p class="section-desc" style="color:rgba(255,255,255,0.8);">Secure your spot on our ocean view terrace or chef's dining room.</p>
+      </div>
+
+      <div class="reservation-box">
+        <form id="reservationForm">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem;">
+            <div class="form-group">
+              <label class="form-label" style="color:#FFF;">Full Name</label>
+              <input type="text" id="resName" class="form-control" placeholder="e.g. Jonathan Miller" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="color:#FFF;">Phone Number</label>
+              <input type="tel" id="resPhone" class="form-control" placeholder="+1 (555) 000-0000" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="color:#FFF;">Reservation Date</label>
+              <input type="date" id="resDate" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="color:#FFF;">Time Slot</label>
+              <select id="resTime" class="form-control" required>
+                <option value="17:00">5:00 PM</option>
+                <option value="18:30">6:30 PM</option>
+                <option value="19:30" selected>7:30 PM</option>
+                <option value="20:30">8:30 PM</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="color:#FFF;">Number of Guests</label>
+              <select id="resGuests" class="form-control">
+                <option value="2">2 Guests (Couple)</option>
+                <option value="4" selected>4 Guests (Family)</option>
+                <option value="6">6 Guests (Party)</option>
+                <option value="8">8+ Guests (Group)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="color:#FFF;">Seating Preference</label>
+              <select id="resSeating" class="form-control">
+                <option value="Terrace">Coastal Terrace (Harbor View)</option>
+                <option value="Indoor">Main Dining Room</option>
+                <option value="Chef Table">Chef's Fire Counter</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color:#FFF;">Special Requests / Celebration Notes</label>
+            <textarea id="resNotes" class="form-control" rows="2" placeholder="e.g. Birthday celebration, high chair needed..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-flame" style="width:100%; margin-top:1rem;">Confirm Table Reservation</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location & Contact Section -->
+  <section id="contact" class="section-padding" style="background:var(--color-bg-sand);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">Visit Us</span>
+        <h2 class="section-title">Location & Opening Hours</h2>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:3rem;">
+        <div style="background:#FFF; padding:2rem; border-radius:var(--radius-lg); border:var(--border-light);">
+          <h3 style="font-family:var(--font-heading); font-size:1.6rem; color:var(--color-ocean-deep); margin-bottom:1rem;">Restaurant Information</h3>
+          <p style="margin-bottom:0.75rem;"><strong>📍 Address:</strong> 742 Coastal Boulevard, Harbor Bay, CA 90210</p>
+          <p style="margin-bottom:0.75rem;"><strong>📞 Phone:</strong> +1 (555) 382-7626</p>
+          <p style="margin-bottom:0.75rem;"><strong>✉️ Email:</strong> contact@osmanseafoods.com</p>
+          <h4 style="margin-top:1.5rem; margin-bottom:0.5rem; color:var(--color-flame-amber);">Operating Hours</h4>
+          <p>Monday – Sunday: 11:00 AM – 10:30 PM Daily</p>
+          <p style="font-size:0.85rem; color:var(--color-text-muted); margin-top:0.3rem;">Kitchen closes at 10:00 PM.</p>
+        </div>
+        
+        <div style="background:#0B192C; color:#FFF; padding:2rem; border-radius:var(--radius-lg); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+          <svg class="icon" style="width:64px;height:64px;color:var(--color-gold-accent);margin-bottom:1rem;" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
+          <h3 style="font-size:1.5rem;">Harbor Bay Waterfront</h3>
+          <p style="color:#94A3B8; margin-top:0.5rem; max-width:320px;">Located right at the Pier 7 entrance with complimentary valet parking for diners.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background:var(--color-ocean-deep); color:#FFF; padding:3rem 0 1.5rem 0; border-top:1px solid rgba(212,175,55,0.2);">
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem;">
+      <div>
+        <div class="brand-title" style="font-size:1.5rem;">OSMAN'S <span>SEAFOODS & GRILL</span></div>
+        <p style="font-size:0.85rem; color:#94A3B8; margin-top:0.3rem;">© 2026 Osman's Seafoods & Grill. All rights reserved.</p>
+      </div>
+
+      <div style="display:flex; gap:1.5rem; font-size:0.9rem;">
+        <a href="staff.html" style="color:var(--color-gold-accent); font-weight:700;">Staff Terminal (POS/KDS)</a>
+        <a href="admin.html" style="color:var(--color-gold-accent); font-weight:700;">Admin Console</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- DISH CUSTOMIZATION MODAL -->
+  <div class="modal-overlay" id="dishModal">
+    <div class="modal-container">
+      <button class="modal-close" data-close-modal>&times;</button>
+      <div id="dishModalContent"></div>
+    </div>
+  </div>
+
+  <!-- SLIDE-OUT CART DRAWER -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3 style="font-size:1.3rem;">Your Order Cart</h3>
+      <button class="modal-close" id="closeCartBtn" style="color:#FFF;">&times;</button>
+    </div>
+    <div class="cart-drawer-body" id="cartDrawerItems"></div>
+    
+    <div class="cart-drawer-footer">
+      <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+        <input type="text" id="cartPromoInput" class="form-control" placeholder="Promo code (e.g. OSMAN10)" style="font-size:0.85rem;">
+        <button id="btnApplyPromo" class="btn btn-secondary btn-sm">Apply</button>
+      </div>
+
+      <div class="cart-summary-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
+      <div class="cart-summary-row"><span>Tax (8%)</span><span id="cartTax">$0.00</span></div>
+      <div class="cart-summary-row"><span>Delivery Fee</span><span id="cartDeliveryFee">$0.00</span></div>
+      <div class="cart-summary-row" style="color:#10B981;"><span>Discount</span><span id="cartDiscount">-$0.00</span></div>
+      <div class="cart-summary-row total"><span>Total Amount</span><span id="cartTotal">$0.00</span></div>
+
+      <button id="btnOpenCheckout" class="btn btn-flame" style="width:100%; margin-top:1.25rem;">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Complete Your Order</h3>
+        <button class="modal-close" data-close-modal>&times;</button>
+      </div>
+      <form id="checkoutForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" id="checkoutName" class="form-control" placeholder="e.g. Elena Rostova" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Contact Phone</label>
+            <input type="tel" id="checkoutPhone" class="form-control" placeholder="+1 (555) 000-0000" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Order Type</label>
+            <select id="checkoutOrderType" class="form-control">
+              <option value="Delivery" selected>Delivery to Address</option>
+              <option value="Dine-In">Dine-In at Table</option>
+              <option value="Takeout">Takeout Pickup</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="fieldTableNumber" style="display:none;">
+            <label class="form-label">Table Selection</label>
+            <input type="text" id="checkoutTable" class="form-control" placeholder="e.g. Table 04">
+          </div>
+          <div class="form-group" id="fieldDeliveryAddress">
+            <label class="form-label">Delivery Address</label>
+            <input type="text" id="checkoutAddress" class="form-control" placeholder="Street name, Apt/Suite #">
+          </div>
+          <div class="form-group" id="fieldPickupTime" style="display:none;">
+            <label class="form-label">Estimated Pickup Time</label>
+            <input type="text" id="checkoutPickupTime" class="form-control" placeholder="e.g. 7:30 PM">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Payment Method</label>
+            <select id="checkoutPaymentMethod" class="form-control">
+              <option value="Cash on Delivery / Pickup" selected>Cash on Delivery / Pickup</option>
+              <option value="Credit Card">Credit / Debit Card</option>
+              <option value="GCash / Digital Wallet">GCash / Digital Wallet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Delivery Notes / Dietary Reminders</label>
+            <textarea id="checkoutNotes" class="form-control" rows="2" placeholder="e.g. Gate code #1234, ring bell..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
+          <button type="submit" class="btn btn-flame">Submit & Place Order</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ORDER CONFIRMATION MODAL -->
+  <div class="modal-overlay" id="confirmationModal">
+    <div class="modal-container" style="text-align:center; padding:2.5rem 2rem;">
+      <div style="width:70px;height:70px;background:rgba(16,185,129,0.15);color:#10B981;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem auto;">
+        <svg class="icon" style="width:40px;height:40px;" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+      </div>
+      <h2 style="font-family:var(--font-heading); color:var(--color-ocean-deep); font-size:2rem; margin-bottom:0.5rem;">Order Successfully Placed!</h2>
+      <p style="color:var(--color-text-muted); margin-bottom:1.5rem;">Thank you for your order at Osman's Seafoods and Grill.</p>
+
+      <div style="background:#F8FAFC; padding:1.25rem; border-radius:var(--radius-md); text-align:left; margin-bottom:1.5rem; font-size:0.92rem;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;"><span>Order Reference:</span><strong id="confOrderId" style="color:var(--color-flame-amber);">OSM-0000</strong></div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;"><span>Customer Name:</span><span id="confCustName">-</span></div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;"><span>Order Type:</span><span id="confOrderType">-</span></div>
+        <div style="display:flex; justify-content:space-between; font-weight:bold; margin-top:0.6rem; padding-top:0.6rem; border-top:var(--border-light);"><span>Total Paid:</span><span id="confTotal">$0.00</span></div>
+      </div>
+
+      <button id="btnTrackOrderFromConf" class="btn btn-flame" style="width:100%;">Track Order Status Live</button>
+    </div>
+  </div>
+
+  <!-- LIVE ORDER TRACKER MODAL -->
+  <div class="modal-overlay" id="trackerModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Live Order Tracker</h3>
+        <button class="modal-close" data-close-modal>&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="text-align:center; margin-bottom:1.5rem;">
+          <div style="font-size:0.85rem; color:var(--color-text-muted); text-transform:uppercase;">Tracking Reference</div>
+          <h2 id="trackOrderId" style="color:var(--color-flame-amber); font-family:var(--font-heading); font-size:2.2rem;">OSM-8942</h2>
+          <span class="badge badge-navy" id="trackOrderType">Delivery</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(4, 1fr); text-align:center; margin:2rem 0; position:relative;">
+          <div id="step-pending" style="padding:0.5rem;"><div style="font-weight:bold; margin-bottom:0.3rem;">1. Placed</div><div style="font-size:0.75rem; color:#64748B;">Received</div></div>
+          <div id="step-preparing" style="padding:0.5rem;"><div style="font-weight:bold; margin-bottom:0.3rem;">2. Kitchen</div><div style="font-size:0.75rem; color:#64748B;">Cooking</div></div>
+          <div id="step-ready" style="padding:0.5rem;"><div style="font-weight:bold; margin-bottom:0.3rem;">3. Ready</div><div style="font-size:0.75rem; color:#64748B;">Dispatch</div></div>
+          <div id="step-completed" style="padding:0.5rem;"><div style="font-weight:bold; margin-bottom:0.3rem;">4. Done</div><div style="font-size:0.75rem; color:#64748B;">Completed</div></div>
+        </div>
+
+        <div style="background:#F8FAFC; padding:1.25rem; border-radius:var(--radius-md);">
+          <h4 style="margin-bottom:0.75rem; color:var(--color-ocean-deep);">Order Summary</h4>
+          <div id="trackOrderItems"></div>
+          <div style="display:flex; justify-content:space-between; margin-top:0.75rem; padding-top:0.75rem; border-top:var(--border-light); font-weight:bold;">
+            <span>Total:</span>
+            <span id="trackOrderTotal">$0.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/customer.js"></script>
+</body>
+</html>

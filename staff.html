@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Osman's Seafoods — Staff Operations Terminal (POS / KDS / Dispatch)</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/staff.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="staff-body">
+
+  <!-- Station Header Bar -->
+  <header class="staff-header">
+    <div style="display:flex; align-items:center; gap:1.25rem;">
+      <div style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--color-gold-accent);">
+        OSMAN'S <span style="font-size:0.75rem; font-family:var(--font-body); color:#94A3B8; display:block;">STAFF TERMINAL</span>
+      </div>
+
+      <div class="staff-station-tabs">
+        <button class="station-tab active" data-station="cashier">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Cashier POS
+        </button>
+        <button class="station-tab" data-station="kds">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+          Kitchen KDS
+        </button>
+        <button class="station-tab" data-station="dispatch">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
+          Delivery Dispatch
+        </button>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:1rem;">
+      <a href="index.html" class="btn btn-outline btn-sm" style="font-size:0.8rem;">Storefront</a>
+      <a href="admin.html" class="btn btn-navy btn-sm" style="font-size:0.8rem;">Admin Console</a>
+    </div>
+  </header>
+
+  <div class="staff-container">
+
+    <!-- CASHIER POS VIEW -->
+    <div id="viewCashier">
+      <div class="cashier-toolbar">
+        <div class="cashier-filter-pills">
+          <button class="status-pill active" data-status="all">All Orders</button>
+          <button class="status-pill" data-status="Pending">Pending</button>
+          <button class="status-pill" data-status="Preparing">Preparing</button>
+          <button class="status-pill" data-status="Ready">Ready</button>
+          <button class="status-pill" data-status="Completed">Completed</button>
+        </div>
+
+        <div style="display:flex; gap:1rem; align-items:center;">
+          <input type="text" id="staffSearchInput" class="form-control" placeholder="Search order # or customer..." style="width:260px; background:#1E293B; border-color:#334155; color:#FFF;">
+          <button id="btnOpenWalkinPOS" class="btn btn-flame btn-sm">+ Walk-In POS Order</button>
+        </div>
+      </div>
+
+      <div class="order-grid-cashier" id="cashierOrderGrid"></div>
+    </div>
+
+    <!-- KITCHEN KDS VIEW -->
+    <div id="viewKDS" style="display:none;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; background:#1E293B; padding:1rem 1.5rem; border-radius:var(--radius-md);">
+        <div>
+          <h2 style="font-family:var(--font-heading); color:var(--color-gold-accent);">KITCHEN DISPLAY SYSTEM (KDS)</h2>
+          <p style="font-size:0.85rem; color:#94A3B8;">Real-time active cooking tickets with prep duration tracking.</p>
+        </div>
+        <span class="badge badge-flame" style="font-size:0.9rem;">🔥 Live Station</span>
+      </div>
+
+      <div class="kds-container" id="kdsGrid"></div>
+    </div>
+
+    <!-- DELIVERY DISPATCH VIEW -->
+    <div id="viewDispatch" style="display:none;">
+      <div style="margin-bottom:1.5rem;">
+        <h2>Active Delivery Dispatch</h2>
+        <p style="font-size:0.88rem; color:#94A3B8;">Assign drivers and manage active delivery order statuses.</p>
+      </div>
+
+      <div class="dispatch-grid" id="dispatchGrid"></div>
+    </div>
+
+  </div>
+
+  <!-- PRINTABLE RECEIPT MODAL -->
+  <div class="modal-overlay" id="receiptModal">
+    <div class="modal-container" style="background:#FFF; color:#000;">
+      <div class="modal-header" style="border-bottom:1px solid #CCC;">
+        <h3 style="color:#000;">Formatted Customer Receipt</h3>
+        <button class="modal-close" data-close-modal style="color:#000;">&times;</button>
+      </div>
+      <div class="modal-body" id="receiptContent"></div>
+      <div class="modal-footer" style="background:#F5F5F5;">
+        <button class="btn btn-secondary" data-close-modal>Close</button>
+        <button id="btnPrintReceiptAction" class="btn btn-flame">Print Receipt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- POS WALKIN ORDER MODAL -->
+  <div class="modal-overlay" id="posWalkinModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Create Walk-In POS Order</h3>
+        <button class="modal-close" data-close-modal>&times;</button>
+      </div>
+      <form id="posWalkinForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Select Menu Item</label>
+            <select id="posItemSelect" class="form-control" required></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Quantity</label>
+            <input type="number" id="posQty" class="form-control" value="1" min="1" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Customer Name</label>
+            <input type="text" id="posCustName" class="form-control" placeholder="Walk-In Customer">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="text" id="posCustPhone" class="form-control" placeholder="+1 (555) 000-0000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Order Type</label>
+            <select id="posOrderType" class="form-control">
+              <option value="Dine-In" selected>Dine-In</option>
+              <option value="Takeout">Takeout</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Table # (if Dine-In)</label>
+            <input type="text" id="posTable" class="form-control" placeholder="e.g. Table 02">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
+          <button type="submit" class="btn btn-flame">Create & Send Order</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/staff.js"></script>
+</body>
+</html>

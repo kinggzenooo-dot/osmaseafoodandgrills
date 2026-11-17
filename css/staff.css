@@ -1,0 +1,331 @@
+/* ==========================================================================
+   Osman's Seafoods and Grill — Staff Operations Stylesheet
+   Cashier POS, Kitchen KDS, and Delivery Dispatch Systems
+   ========================================================================== */
+
+/* Staff Station Layout */
+.staff-body {
+  background: #0F172A;
+  color: #F8FAFC;
+  font-family: var(--font-body);
+  min-height: 100vh;
+}
+
+.staff-header {
+  background: #1E293B;
+  border-bottom: 1px solid #334155;
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.staff-station-tabs {
+  display: flex;
+  gap: 0.5rem;
+  background: #0F172A;
+  padding: 0.35rem;
+  border-radius: var(--radius-md);
+  border: 1px solid #334155;
+}
+
+.station-tab {
+  background: transparent;
+  color: #94A3B8;
+  border: none;
+  padding: 0.55rem 1.2rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--transition-fast);
+}
+
+.station-tab:hover {
+  color: #F8FAFC;
+}
+
+.station-tab.active {
+  background: var(--color-flame-amber);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(255, 101, 0, 0.3);
+}
+
+/* Operational Content Container */
+.staff-container {
+  padding: 1.5rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Cashier POS View */
+.cashier-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cashier-filter-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.status-pill {
+  background: #1E293B;
+  border: 1px solid #334155;
+  color: #94A3B8;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.status-pill.active, .status-pill:hover {
+  background: #334155;
+  color: #FFFFFF;
+  border-color: #64748B;
+}
+
+.order-grid-cashier {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.5rem;
+}
+
+.order-card-staff {
+  background: #1E293B;
+  border: 1px solid #334155;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.order-card-header {
+  padding: 1rem 1.25rem;
+  background: #0F172A;
+  border-bottom: 1px solid #334155;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.order-card-id {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-gold-accent);
+}
+
+.order-card-time {
+  font-size: 0.78rem;
+  color: #94A3B8;
+}
+
+.order-card-body {
+  padding: 1.25rem;
+  flex: 1;
+}
+
+.order-cust-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+}
+
+.order-items-list {
+  list-style: none;
+  border-top: 1px dashed #334155;
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.order-item-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.order-item-customization {
+  font-size: 0.78rem;
+  color: #94A3B8;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.order-card-footer {
+  padding: 1rem 1.25rem;
+  background: #0F172A;
+  border-top: 1px solid #334155;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.order-card-total {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #F8FAFC;
+}
+
+/* Kitchen KDS Display */
+.kds-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.kds-ticket {
+  background: #1E293B;
+  border-radius: var(--radius-md);
+  border: 2px solid #334155;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.kds-ticket.urgent {
+  border-color: #EF4444;
+  animation: pulseBorder 1.5s infinite;
+}
+
+@keyframes pulseBorder {
+  0% { border-color: #EF4444; }
+  50% { border-color: #7F1D1D; }
+  100% { border-color: #EF4444; }
+}
+
+.kds-ticket-header {
+  padding: 0.85rem 1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.1rem;
+}
+
+.kds-ticket-header.pending { background: var(--color-status-pending); color: #000; }
+.kds-ticket-header.preparing { background: var(--color-status-preparing); color: #FFF; }
+.kds-ticket-header.ready { background: var(--color-status-ready); color: #FFF; }
+
+.kds-timer {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-family: monospace;
+}
+
+.kds-ticket-body {
+  padding: 1.25rem;
+}
+
+.kds-item-line {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #334155;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.kds-item-qty {
+  background: var(--color-flame-amber);
+  color: #FFFFFF;
+  font-weight: 800;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+}
+
+.kds-item-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #F8FAFC;
+}
+
+.kds-item-options {
+  font-size: 0.82rem;
+  color: #F59E0B;
+  margin-top: 0.2rem;
+  font-weight: 600;
+}
+
+.kds-ticket-footer {
+  padding: 1rem;
+  background: #0F172A;
+  border-top: 1px solid #334155;
+}
+
+/* Delivery Dispatch Screen */
+.dispatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 1.5rem;
+}
+
+.dispatch-card {
+  background: #1E293B;
+  border: 1px solid #334155;
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+
+/* Printable Receipt Format */
+.receipt-printable {
+  background: #FFFFFF;
+  color: #000000;
+  padding: 2rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  max-width: 380px;
+  margin: 0 auto;
+  border: 1px solid #DDD;
+}
+
+.receipt-header {
+  text-align: center;
+  border-bottom: 1px dashed #000;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.receipt-header h2 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.receipt-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.receipt-table th, .receipt-table td {
+  text-align: left;
+  padding: 0.25rem 0;
+}
+
+.receipt-table th:last-child, .receipt-table td:last-child {
+  text-align: right;
+}
+
+.receipt-divider {
+  border-top: 1px dashed #000;
+  margin: 0.75rem 0;
+}
