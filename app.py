@@ -821,10 +821,11 @@ def static_proxy(path):
     return send_from_directory(BASE_DIR, "index.html")
 
 # --------------------------------------------------------------------------
-# Application Entry Point
+# Application Entry Point & Auto-Initialization
 # --------------------------------------------------------------------------
+init_db()
+
 if __name__ == "__main__":
-    init_db()
     port = int(os.environ.get("PORT", 5000))
     print(f"\n============================================================")
     print(f" 🔥 OSMAN'S SEAFOODS & GRILL RESTAURANT SYSTEM RUNNING")

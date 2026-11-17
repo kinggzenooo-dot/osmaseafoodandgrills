@@ -111,5 +111,23 @@ python app.py
 
 ---
 
+## ☁️ Deploying to Render (render.com)
+
+This repository includes `render.yaml` and `Procfile` for deployment on Render:
+
+1. Go to [Render Dashboard](https://dashboard.render.com).
+2. Click **New +** -> **Web Service**.
+3. Choose **Build and deploy from a Git repository**.
+4. Connect and select: `https://github.com/kinggzenooo-dot/osmaseafoodandgrills`.
+5. Render will automatically detect the settings:
+   - **Environment / Runtime**: `Python 3`
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `gunicorn app:app --bind 0.0.0.0:$PORT`
+   - **Plan**: `Free`
+6. Click **Create Web Service** (or **Deploy**).
+7. Your app will be live at `https://<your-subdomain>.onrender.com`!
+
+---
+
 ## 🌿 Git Repository
 - GitHub Remote: `https://github.com/kinggzenooo-dot/osmaseafoodandgrills.git`
