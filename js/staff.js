@@ -12,8 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initStationTabs();
 
-  // Auto-switch to user's assigned station if applicable
-  if (window.OsmanAuth && window.OsmanAuth.isLoggedIn()) {
+  // Auto-switch based on URL param or assigned user role
+  const urlStation = new URLSearchParams(window.location.search).get('station');
+  if (urlStation) {
+    const tab = document.querySelector(`.station-tab[data-station="${urlStation}"]`);
+    if (tab) tab.click();
+  } else if (window.OsmanAuth && window.OsmanAuth.isLoggedIn()) {
     const u = window.OsmanAuth.getCurrentUser();
     if (u.subrole === 'kds') {
       const tab = document.querySelector('.station-tab[data-station="kds"]');

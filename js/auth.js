@@ -286,13 +286,8 @@
     }
 
     logout() {
-      const user = this.currentUser;
       this.clearSession();
-      // If we are on admin.html or staff.html, redirect smoothly
-      const path = window.location.pathname.toLowerCase();
-      if (path.includes('admin.html') || path.includes('staff.html')) {
-        window.location.href = 'index.html';
-      }
+      window.location.href = 'login.html';
     }
   }
 
@@ -664,29 +659,30 @@
       }
     }
 
-    handlePostLoginRedirect(user) {
-      const currentPath = window.location.pathname.toLowerCase();
-      // If user is on login.html standalone, redirect to appropriate destination
-      if (currentPath.includes('login.html')) {
-        const urlParams = new URLSearchParams(window.location.search);
-        const redirect = urlParams.get('redirect');
-        if (redirect) {
-          window.location.href = redirect;
-          return;
-        }
-
-        if (user.role === 'admin') {
-          window.location.href = 'admin.html';
-        } else if (user.role === 'staff') {
-          window.location.href = 'staff.html';
-        } else {
-          window.location.href = 'index.html';
-        }
+    routeUserByRole(user, redirectParam = null) {
+      if (redirectParam) {
+        window.location.href = redirectParam;
         return;
       }
+      if (user.role === 'admin') {
+        window.location.href = 'admin.html';
+      } else if (user.role === 'staff') {
+        if (user.subrole === 'kds') {
+          window.location.href = 'staff.html?station=kds';
+        } else if (user.subrole === 'dispatch') {
+          window.location.href = 'staff.html?station=dispatch';
+        } else {
+          window.location.href = 'staff.html?station=cashier';
+        }
+      } else {
+        window.location.href = 'index.html';
+      }
+    }
 
-      // If user logged in as Admin while on index.html, provide gentle option or notification
-      this.renderNavWidgets();
+    handlePostLoginRedirect(user) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const redirect = urlParams.get('redirect');
+      this.routeUserByRole(user, redirect);
     }
 
     openModal(options = {}) {
@@ -747,14 +743,11 @@
 
         if (!user) {
           userWidget.innerHTML = `
-            <button id="openAuthModalBtn" class="btn btn-outline btn-sm" style="font-size:0.82rem; padding:0.45rem 0.95rem; display:flex; align-items:center; gap:0.4rem;">
+            <a href="login.html" class="btn btn-outline btn-sm" id="navSignInLink" style="font-size:0.82rem; padding:0.45rem 0.95rem; display:flex; align-items:center; gap:0.4rem; text-decoration:none;">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
               <span>Sign In</span>
-            </button>
+            </a>
           `;
-          document.getElementById('openAuthModalBtn')?.addEventListener('click', () => {
-            this.openModal({ tab: 'login' });
-          });
         } else {
           const roleBadgeClass = user.role === 'admin' ? 'role-admin' : (user.role === 'staff' ? 'role-staff' : 'role-customer');
           const roleLabel = user.role === 'admin' ? '👑 Admin' : (user.role === 'staff' ? `💼 ${user.subrole || 'Staff'}` : '👤 Customer');
@@ -789,10 +782,10 @@
                 </a>
               ` : ''}
 
-              <button class="user-dropdown-item" id="switchUserQuickBtn" style="width:100%; text-align:left; background:none; border:none;">
+              <a href="login.html" class="user-dropdown-item" style="text-decoration:none;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"/></svg>
                 Switch Account / Role
-              </button>
+              </a>
 
               <div class="user-dropdown-divider"></div>
 
@@ -813,11 +806,6 @@
 
           document.addEventListener('click', () => {
             dropdown?.classList.remove('active');
-          });
-
-          document.getElementById('switchUserQuickBtn')?.addEventListener('click', () => {
-            dropdown?.classList.remove('active');
-            this.openModal({ tab: 'login' });
           });
 
           document.getElementById('logoutActionBtn')?.addEventListener('click', () => {
@@ -858,7 +846,7 @@
         `;
 
         document.getElementById('adminSwitchRoleBtn')?.addEventListener('click', () => {
-          this.openModal({ tab: 'login' });
+          window.location.href = 'login.html';
         });
         document.getElementById('adminLogoutBtn')?.addEventListener('click', () => {
           window.OsmanAuth.logout();
@@ -897,7 +885,7 @@
         `;
 
         document.getElementById('staffPinSwitchBtn')?.addEventListener('click', () => {
-          this.openModal({ tab: 'pin' });
+          window.location.href = 'login.html?tab=pin';
         });
         document.getElementById('staffLogoutBtn')?.addEventListener('click', () => {
           window.OsmanAuth.logout();
@@ -915,26 +903,17 @@
       // Guard for admin.html
       if (path.includes('admin.html')) {
         if (!user || user.role !== 'admin') {
-          this.showAccessRestrictedModal({
-            requiredRole: 'Administrator',
-            message: 'You must sign in with an Administrator account to access the Osman Management Console.',
-            demoTip: 'Tip: Click "👑 Admin (Owner)" in the Instant Role Switcher below to test!',
-            onCancelRedirect: 'index.html'
-          });
+          window.location.href = 'login.html?redirect=admin.html&required=admin';
         }
       }
 
       // Guard for staff.html
       if (path.includes('staff.html')) {
         if (!user || (user.role !== 'staff' && user.role !== 'admin')) {
-          this.showAccessRestrictedModal({
-            requiredRole: 'Staff / Crew',
-            message: 'Staff Terminal access requires Cashier, Kitchen, Driver or Admin credentials.',
-            demoTip: 'Tip: Click any Staff demo pill or enter PIN (e.g. 2002) below to unlock!',
-            onCancelRedirect: 'index.html'
-          });
+          window.location.href = 'login.html?redirect=staff.html&required=staff';
         }
       }
+    }
     }
 
     showAccessRestrictedModal({ requiredRole, message, demoTip, onCancelRedirect }) {

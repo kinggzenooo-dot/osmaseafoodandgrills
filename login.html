@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Osman's Seafoods and Grill — Secure Sign In & Role Portal</title>
-  <meta name="description" content="Sign in to Osman's Seafoods and Grill. Dedicated portal for Customers, Staff POS & Kitchen KDS, and Management.">
+  <title>Osman's Seafoods and Grill — Unified Sign In & Role Portal</title>
+  <meta name="description" content="One central sign in portal for Osman's Seafoods & Grill. Access Admin Console, Staff POS, Kitchen KDS, Delivery Dispatch, or Customer Account.">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/auth.css">
   <style>
@@ -14,18 +14,18 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 2rem 1rem;
+      padding: 2.5rem 1rem;
       background: radial-gradient(circle at 50% 20%, #16263B 0%, #0B192C 60%, #050B14 100%);
       position: relative;
     }
 
     .login-glow-circle {
       position: absolute;
-      width: 450px;
-      height: 450px;
+      width: 500px;
+      height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 101, 0, 0.12) 0%, transparent 70%);
-      top: 15%;
+      background: radial-gradient(circle, rgba(255, 101, 0, 0.14) 0%, transparent 70%);
+      top: 10%;
       pointer-events: none;
     }
 
@@ -37,11 +37,93 @@
       font-size: 0.88rem;
       font-weight: 600;
       margin-bottom: 1.5rem;
+      text-decoration: none;
       transition: color 0.2s;
     }
 
     .back-storefront-link:hover {
       color: var(--color-flame-amber);
+    }
+
+    /* Active Session Banner */
+    .active-session-banner {
+      background: rgba(30, 62, 98, 0.5);
+      border: 1px solid var(--color-gold-accent);
+      border-radius: 12px;
+      padding: 0.85rem 1.25rem;
+      margin-bottom: 1.25rem;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    /* Role Quick Select Cards */
+    .role-grid-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.65rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .role-card-btn {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 0.85rem 0.5rem;
+      color: #F8FAFC;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .role-card-btn:hover {
+      border-color: #FF6500;
+      background: rgba(255, 101, 0, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 101, 0, 0.25);
+    }
+
+    .role-card-btn.active-role-card {
+      border-color: #D4AF37;
+      background: rgba(212, 175, 55, 0.18);
+      box-shadow: 0 0 14px rgba(212, 175, 55, 0.35);
+    }
+
+    .role-card-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .role-card-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #FFF;
+      line-height: 1.2;
+    }
+
+    .role-card-subtitle {
+      font-size: 0.68rem;
+      color: #94A3B8;
+      line-height: 1.1;
+    }
+
+    .notice-guard-box {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.25rem;
+      color: #FDE68A;
+      font-size: 0.85rem;
+      display: none;
+      align-items: center;
+      gap: 0.6rem;
     }
   </style>
 </head>
@@ -52,11 +134,11 @@
 
     <a href="index.html" class="back-storefront-link">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-      Return to Restaurant Storefront
+      Return to Storefront
     </a>
 
-    <!-- Embedded Auth Card -->
-    <div class="auth-card" style="box-shadow: 0 30px 70px rgba(0,0,0,0.6), 0 0 40px rgba(255,101,0,0.2);">
+    <!-- Unified Auth Card -->
+    <div class="auth-card" style="max-width: 540px; box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 45px rgba(255,101,0,0.22);">
       <div class="auth-card-banner"></div>
       
       <div class="auth-header">
@@ -69,19 +151,81 @@
             <span>SEAFOODS & GRILL</span>
           </div>
         </div>
-        <p class="auth-subtitle" id="pageAuthSubtitle">Unified Access Portal for Customers, Staff & Admins</p>
+        <p class="auth-subtitle" id="pageAuthSubtitle">Central Access Portal — Select any role or sign in below</p>
       </div>
 
-      <div class="auth-tabs">
-        <button class="auth-tab-btn active" data-tab="login">Sign In</button>
-        <button class="auth-tab-btn" data-tab="register">Register</button>
-        <button class="auth-tab-btn tab-pin" data-tab="pin">Staff PIN</button>
-      </div>
+      <div class="auth-body" style="padding: 1.5rem 1.75rem 2rem;">
+        
+        <!-- Guard / Redirection Notice -->
+        <div id="noticeGuardBox" class="notice-guard-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+          <span id="noticeGuardText">Authentication required to proceed to the requested station.</span>
+        </div>
 
-      <div class="auth-body">
+        <!-- Active Session Banner (if user is currently signed in) -->
+        <div id="activeSessionBanner" class="active-session-banner">
+          <div>
+            <div style="font-size:0.75rem; color:#94A3B8;">Currently Signed In</div>
+            <div style="font-weight:700; color:#FFF; font-size:0.92rem;" id="activeSessionUser">Osman Al-Mansoor</div>
+            <span class="user-role-tag role-admin" id="activeSessionBadge">ADMIN</span>
+          </div>
+          <div style="display:flex; gap:0.5rem;">
+            <button id="btnContinueToPortal" class="btn btn-flame btn-sm" style="font-size:0.8rem; padding:0.4rem 0.8rem;">Enter Portal</button>
+            <button id="btnLogoutCurrentSession" class="btn btn-outline btn-sm" style="font-size:0.8rem; padding:0.4rem 0.8rem;">Sign Out</button>
+          </div>
+        </div>
+
+        <!-- 1-CLICK ROLE DIRECT ACCESS -->
+        <div style="margin-bottom:0.75rem;">
+          <div class="demo-title" style="text-align:left; margin-bottom:0.6rem; display:flex; justify-content:space-between; align-items:center;">
+            <span>⚡ Instant 1-Click Role Direct Sign-In</span>
+            <span style="font-size:0.68rem; color:#94A3B8; text-transform:none; font-weight:normal;">Syncs to matching station</span>
+          </div>
+          <div class="role-grid-selector" id="roleGridSelector">
+            <button class="role-card-btn" data-email="admin@osmanseafoods.com" data-pwd="admin123" data-target="admin.html">
+              <span class="role-card-icon">👑</span>
+              <span class="role-card-title">Admin</span>
+              <span class="role-card-subtitle">Full Console</span>
+            </button>
+            <button class="role-card-btn" data-email="cashier@osmanseafoods.com" data-pwd="staff123" data-target="staff.html?station=cashier">
+              <span class="role-card-icon">💼</span>
+              <span class="role-card-title">Cashier</span>
+              <span class="role-card-subtitle">POS Register</span>
+            </button>
+            <button class="role-card-btn" data-email="chef@osmanseafoods.com" data-pwd="chef123" data-target="staff.html?station=kds">
+              <span class="role-card-icon">👨‍🍳</span>
+              <span class="role-card-title">Kitchen Lead</span>
+              <span class="role-card-subtitle">KDS Display</span>
+            </button>
+            <button class="role-card-btn" data-email="driver@osmanseafoods.com" data-pwd="driver123" data-target="staff.html?station=dispatch">
+              <span class="role-card-icon">🛵</span>
+              <span class="role-card-title">Driver</span>
+              <span class="role-card-subtitle">Dispatch</span>
+            </button>
+            <button class="role-card-btn" data-email="customer@gmail.com" data-pwd="customer123" data-target="index.html">
+              <span class="role-card-icon">👤</span>
+              <span class="role-card-title">Customer</span>
+              <span class="role-card-subtitle">Diner Order</span>
+            </button>
+          </div>
+        </div>
+
+        <div style="text-align:center; font-size:0.75rem; color:#64748B; margin: 1rem 0; display:flex; align-items:center; gap:0.5rem;">
+          <span style="flex:1; height:1px; background:rgba(255,255,255,0.08);"></span>
+          <span>OR SIGN IN WITH CREDENTIALS</span>
+          <span style="flex:1; height:1px; background:rgba(255,255,255,0.08);"></span>
+        </div>
+
+        <!-- Mode Tabs -->
+        <div class="auth-tabs" style="margin: 0 0 1.25rem 0;">
+          <button class="auth-tab-btn active" data-tab="login">Email & Password</button>
+          <button class="auth-tab-btn" data-tab="register">Customer Register</button>
+          <button class="auth-tab-btn tab-pin" data-tab="pin">Staff PIN Pad</button>
+        </div>
+
         <div id="pageAuthAlert" class="auth-alert"></div>
 
-        <!-- FORM: SIGN IN -->
+        <!-- TAB 1: EMAIL & PASSWORD LOGIN -->
         <form id="pageLoginForm" class="auth-form-view active">
           <div class="auth-group">
             <label class="auth-label">Email Address</label>
@@ -94,7 +238,7 @@
           <div class="auth-group">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
               <label class="auth-label" style="margin-bottom:0;">Password</label>
-              <span style="font-size:0.75rem; color:#94A3B8;">Case-sensitive</span>
+              <span style="font-size:0.72rem; color:#94A3B8;">Case-sensitive</span>
             </div>
             <div class="auth-input-wrapper">
               <svg class="auth-input-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
@@ -111,7 +255,7 @@
           </button>
         </form>
 
-        <!-- FORM: REGISTER -->
+        <!-- TAB 2: REGISTER -->
         <form id="pageRegisterForm" class="auth-form-view">
           <div class="auth-group">
             <label class="auth-label">Full Name</label>
@@ -130,7 +274,7 @@
           </div>
 
           <div class="auth-group">
-            <label class="auth-label">Phone Number</label>
+            <label class="auth-label">Phone Number (For Order Tracking)</label>
             <div class="auth-input-wrapper">
               <svg class="auth-input-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
               <input type="tel" id="pRegPhone" class="auth-input" placeholder="+1 (555) 948-2019" required>
@@ -138,7 +282,7 @@
           </div>
 
           <div class="auth-group">
-            <label class="auth-label">Password</label>
+            <label class="auth-label">Create Password</label>
             <div class="auth-input-wrapper">
               <svg class="auth-input-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
               <input type="password" id="pRegPassword" class="auth-input" placeholder="At least 6 characters" required minlength="6">
@@ -149,16 +293,16 @@
           </div>
 
           <button type="submit" class="auth-submit-btn" id="pRegSubmitBtn">
-            <span>Create Account & Join</span>
+            <span>Create Customer Account</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
           </button>
         </form>
 
-        <!-- FORM: STAFF PIN -->
+        <!-- TAB 3: STAFF PIN -->
         <div id="pagePinForm" class="auth-form-view">
           <div class="pin-pad-container">
             <p style="font-size:0.85rem; color:#94A3B8; text-align:center;">
-              Enter your assigned 4-digit Staff Station PIN to unlock.
+              Enter your assigned 4-digit Staff PIN to unlock Cashier POS, KDS, or Dispatch terminal.
             </p>
 
             <div class="pin-display-dots" id="pPinDisplayDots">
@@ -182,13 +326,10 @@
               <button class="pin-key" data-num="0">0</button>
               <button class="pin-key key-action" id="pPinBackspaceBtn">⌫</button>
             </div>
+            <div style="font-size:0.75rem; color:#64748B; text-align:center;">
+              Demo PINs: <code>1001</code> (Admin) &bull; <code>2002</code> (Cashier) &bull; <code>3003</code> (Kitchen) &bull; <code>4004</code> (Driver)
+            </div>
           </div>
-        </div>
-
-        <!-- 1-CLICK DEMO ROLES -->
-        <div class="demo-accounts-section">
-          <div class="demo-title">⚡ Instant 1-Click Role Switcher</div>
-          <div class="demo-pills" id="pageDemoPills"></div>
         </div>
 
       </div>
@@ -201,6 +342,9 @@
     document.addEventListener('DOMContentLoaded', () => {
       let pagePin = '';
       const alertEl = document.getElementById('pageAuthAlert');
+      const noticeGuardBox = document.getElementById('noticeGuardBox');
+      const noticeGuardText = document.getElementById('noticeGuardText');
+      const activeSessionBanner = document.getElementById('activeSessionBanner');
 
       function showPageAlert(msg, type = 'error') {
         alertEl.textContent = msg;
@@ -212,11 +356,47 @@
         alertEl.className = 'auth-alert';
       }
 
-      // Check URL parameters for tab and redirect
+      // 1. Check URL parameters
       const urlParams = new URLSearchParams(window.location.search);
       const reqTab = urlParams.get('tab') || 'login';
       const redirect = urlParams.get('redirect') || '';
+      const required = urlParams.get('required') || '';
+      const msg = urlParams.get('msg') || '';
 
+      if (required === 'admin') {
+        noticeGuardBox.style.display = 'flex';
+        noticeGuardText.textContent = '👑 Administrator Access Required: Please sign in with an Admin account or click "Admin" below.';
+      } else if (required === 'staff') {
+        noticeGuardBox.style.display = 'flex';
+        noticeGuardText.textContent = '💼 Staff Terminal Access Required: Please sign in with Staff credentials or punch in your PIN.';
+      } else if (msg === 'logged_out') {
+        noticeGuardBox.style.display = 'flex';
+        noticeGuardBox.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+        noticeGuardBox.style.background = 'rgba(16, 185, 129, 0.15)';
+        noticeGuardBox.style.color = '#6EE7B7';
+        noticeGuardText.textContent = '👋 You have been logged out successfully. Sign in with any role to continue.';
+      }
+
+      // 2. Check if currently signed in
+      const currentUser = window.OsmanAuth.getCurrentUser();
+      if (currentUser) {
+        activeSessionBanner.style.display = 'flex';
+        document.getElementById('activeSessionUser').textContent = currentUser.name;
+        const badge = document.getElementById('activeSessionBadge');
+        badge.textContent = currentUser.role.toUpperCase() + (currentUser.subrole ? ` (${currentUser.subrole.toUpperCase()})` : '');
+        badge.className = `user-role-tag role-${currentUser.role}`;
+
+        document.getElementById('btnContinueToPortal').addEventListener('click', () => {
+          performRedirect(currentUser);
+        });
+
+        document.getElementById('btnLogoutCurrentSession').addEventListener('click', () => {
+          window.OsmanAuth.clearSession();
+          window.location.href = 'login.html?msg=logged_out';
+        });
+      }
+
+      // 3. Tab navigation
       const tabs = document.querySelectorAll('.auth-tabs .auth-tab-btn');
       tabs.forEach(tab => {
         tab.addEventListener('click', (e) => {
@@ -228,10 +408,10 @@
 
           if (tName === 'login') {
             document.getElementById('pageLoginForm').classList.add('active');
-            document.getElementById('pageAuthSubtitle').textContent = 'Sign in with your email & password';
+            document.getElementById('pageAuthSubtitle').textContent = 'Sign in with your email & password for your role';
           } else if (tName === 'register') {
             document.getElementById('pageRegisterForm').classList.add('active');
-            document.getElementById('pageAuthSubtitle').textContent = 'Create a customer dining account';
+            document.getElementById('pageAuthSubtitle').textContent = 'Create a customer dining account for faster orders';
           } else if (tName === 'pin') {
             document.getElementById('pagePinForm').classList.add('active');
             document.getElementById('pageAuthSubtitle').textContent = 'Staff 4-digit POS & KDS terminal access';
@@ -242,7 +422,7 @@
         });
       });
 
-      // Activate initial tab
+      // Activate initial tab if requested via ?tab=
       const initTabBtn = document.querySelector(`.auth-tabs .auth-tab-btn[data-tab="${reqTab}"]`);
       if (initTabBtn) initTabBtn.click();
 
@@ -254,31 +434,32 @@
         });
       });
 
-      // Demo Pills
-      const demoContainer = document.getElementById('pageDemoPills');
-      const accounts = window.OsmanAuth.getDemoAccounts();
-      demoContainer.innerHTML = accounts.map(acc => `
-        <button class="demo-pill ${acc.role === 'admin' ? 'pill-admin' : ''}" data-email="${acc.email}" data-pwd="${acc.password}">
-          ${acc.label}
-        </button>
-      `).join('');
-
-      demoContainer.querySelectorAll('.demo-pill').forEach(btn => {
+      // 4. 1-Click Role Direct Sign-In Cards
+      document.querySelectorAll('.role-card-btn').forEach(btn => {
         btn.addEventListener('click', async (e) => {
           const email = e.currentTarget.getAttribute('data-email');
           const pwd = e.currentTarget.getAttribute('data-pwd');
-          showPageAlert('Signing in as ' + email + '...', 'success');
+          const targetUrl = e.currentTarget.getAttribute('data-target');
+
+          showPageAlert(`Signing in as ${email}...`, 'success');
           const res = await window.OsmanAuth.login(email, pwd);
+
           if (res.success) {
             showPageAlert(res.message, 'success');
-            setTimeout(() => performRedirect(res.user), 600);
+            setTimeout(() => {
+              if (redirect) {
+                window.location.href = redirect;
+              } else {
+                window.location.href = targetUrl;
+              }
+            }, 500);
           } else {
             showPageAlert(res.error, 'error');
           }
         });
       });
 
-      // Sign In Submit
+      // 5. Email & Password Form Submit
       document.getElementById('pageLoginForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = document.getElementById('pLoginEmail').value;
@@ -286,7 +467,7 @@
         const submitBtn = document.getElementById('pLoginSubmitBtn');
 
         submitBtn.disabled = true;
-        submitBtn.querySelector('span').textContent = 'Signing In...';
+        submitBtn.querySelector('span').textContent = 'Authenticating...';
 
         const res = await window.OsmanAuth.login(email, password);
         submitBtn.disabled = false;
@@ -294,13 +475,13 @@
 
         if (res.success) {
           showPageAlert(res.message, 'success');
-          setTimeout(() => performRedirect(res.user), 600);
+          setTimeout(() => performRedirect(res.user), 500);
         } else {
           showPageAlert(res.error, 'error');
         }
       });
 
-      // Register Submit
+      // 6. Register Form Submit
       document.getElementById('pageRegisterForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const name = document.getElementById('pRegName').value.trim();
@@ -314,17 +495,17 @@
 
         const res = await window.OsmanAuth.register({ name, email, phone, password, role: 'customer' });
         submitBtn.disabled = false;
-        submitBtn.querySelector('span').textContent = 'Create Account & Join';
+        submitBtn.querySelector('span').textContent = 'Create Customer Account';
 
         if (res.success) {
           showPageAlert(res.message, 'success');
-          setTimeout(() => performRedirect(res.user), 600);
+          setTimeout(() => performRedirect(res.user), 500);
         } else {
           showPageAlert(res.error, 'error');
         }
       });
 
-      // PIN Pad
+      // 7. Staff PIN Keypad
       document.querySelectorAll('#pagePinForm .pin-key[data-num]').forEach(key => {
         key.addEventListener('click', (e) => {
           if (pagePin.length < 4) {
@@ -363,25 +544,33 @@
         const res = await window.OsmanAuth.pinLogin(pagePin);
         if (res.success) {
           showPageAlert(res.message, 'success');
-          setTimeout(() => performRedirect(res.user), 600);
+          setTimeout(() => performRedirect(res.user), 500);
         } else {
           showPageAlert(res.error, 'error');
           setTimeout(() => {
             pagePin = '';
             updatePagePinDots();
-          }, 900);
+          }, 800);
         }
       }
 
+      // 8. Centralized Role Router
       function performRedirect(user) {
         if (redirect) {
           window.location.href = redirect;
           return;
         }
+
         if (user.role === 'admin') {
           window.location.href = 'admin.html';
         } else if (user.role === 'staff') {
-          window.location.href = 'staff.html';
+          if (user.subrole === 'kds') {
+            window.location.href = 'staff.html?station=kds';
+          } else if (user.subrole === 'dispatch') {
+            window.location.href = 'staff.html?station=dispatch';
+          } else {
+            window.location.href = 'staff.html?station=cashier';
+          }
         } else {
           window.location.href = 'index.html';
         }
