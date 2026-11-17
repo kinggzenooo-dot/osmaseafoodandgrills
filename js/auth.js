@@ -935,17 +935,6 @@
         }
       }
     }
-    }
-
-    showAccessRestrictedModal({ requiredRole, message, demoTip, onCancelRedirect }) {
-      this.openModal({
-        tab: 'login',
-        alert: {
-          message: `${requiredRole} Required: ${message} ${demoTip}`,
-          type: 'error'
-        }
-      });
-    }
   }
 
   // Initialize UI Manager

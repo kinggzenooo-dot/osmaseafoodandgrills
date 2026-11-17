@@ -456,11 +456,7 @@
           if (res.success) {
             showPageAlert(res.message, 'success');
             setTimeout(() => {
-              if (redirect) {
-                window.location.href = redirect;
-              } else {
-                window.location.href = targetUrl;
-              }
+              window.location.href = targetUrl;
             }, 300);
           } else {
             showPageAlert(res.error, 'error');
@@ -567,8 +563,15 @@
       // 8. Centralized Role Router
       function performRedirect(user) {
         if (redirect) {
-          window.location.href = redirect;
-          return;
+          // If redirected from admin or staff, ensure user actually has that role before sending them back
+          if (redirect.includes('admin') && user.role === 'admin') {
+            window.location.href = redirect;
+            return;
+          }
+          if (redirect.includes('staff') && (user.role === 'staff' || user.role === 'admin')) {
+            window.location.href = redirect;
+            return;
+          }
         }
 
         if (user.role === 'admin') {
