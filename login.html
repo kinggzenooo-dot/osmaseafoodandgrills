@@ -170,8 +170,8 @@
             <span class="user-role-tag role-admin" id="activeSessionBadge">ADMIN</span>
           </div>
           <div style="display:flex; gap:0.5rem;">
-            <button id="btnContinueToPortal" class="btn btn-flame btn-sm" style="font-size:0.8rem; padding:0.4rem 0.8rem;">Enter Portal</button>
-            <button id="btnLogoutCurrentSession" class="btn btn-outline btn-sm" style="font-size:0.8rem; padding:0.4rem 0.8rem;">Sign Out</button>
+            <button type="button" id="btnContinueToPortal" class="btn btn-flame btn-sm" style="font-size:0.8rem; padding:0.4rem 0.8rem;">Enter Portal</button>
+            <button type="button" id="btnLogoutCurrentSession" class="btn btn-outline btn-sm" style="font-size:0.8rem; padding:0.4rem 0.8rem;">Sign Out</button>
           </div>
         </div>
 
@@ -182,27 +182,27 @@
             <span style="font-size:0.68rem; color:#94A3B8; text-transform:none; font-weight:normal;">Syncs to matching station</span>
           </div>
           <div class="role-grid-selector" id="roleGridSelector">
-            <button class="role-card-btn" data-email="admin@osmanseafoods.com" data-pwd="admin123" data-target="admin.html">
+            <button type="button" class="role-card-btn" data-email="admin@osmanseafoods.com" data-pwd="admin123" data-target="admin.html">
               <span class="role-card-icon">👑</span>
               <span class="role-card-title">Admin</span>
               <span class="role-card-subtitle">Full Console</span>
             </button>
-            <button class="role-card-btn" data-email="cashier@osmanseafoods.com" data-pwd="staff123" data-target="staff.html?station=cashier">
+            <button type="button" class="role-card-btn" data-email="cashier@osmanseafoods.com" data-pwd="staff123" data-target="staff.html?station=cashier">
               <span class="role-card-icon">💼</span>
               <span class="role-card-title">Cashier</span>
               <span class="role-card-subtitle">POS Register</span>
             </button>
-            <button class="role-card-btn" data-email="chef@osmanseafoods.com" data-pwd="chef123" data-target="staff.html?station=kds">
+            <button type="button" class="role-card-btn" data-email="chef@osmanseafoods.com" data-pwd="chef123" data-target="staff.html?station=kds">
               <span class="role-card-icon">👨‍🍳</span>
               <span class="role-card-title">Kitchen Lead</span>
               <span class="role-card-subtitle">KDS Display</span>
             </button>
-            <button class="role-card-btn" data-email="driver@osmanseafoods.com" data-pwd="driver123" data-target="staff.html?station=dispatch">
+            <button type="button" class="role-card-btn" data-email="driver@osmanseafoods.com" data-pwd="driver123" data-target="staff.html?station=dispatch">
               <span class="role-card-icon">🛵</span>
               <span class="role-card-title">Driver</span>
               <span class="role-card-subtitle">Dispatch</span>
             </button>
-            <button class="role-card-btn" data-email="customer@gmail.com" data-pwd="customer123" data-target="index.html">
+            <button type="button" class="role-card-btn" data-email="customer@gmail.com" data-pwd="customer123" data-target="index.html">
               <span class="role-card-icon">👤</span>
               <span class="role-card-title">Customer</span>
               <span class="role-card-subtitle">Diner Order</span>
@@ -218,9 +218,9 @@
 
         <!-- Mode Tabs -->
         <div class="auth-tabs" style="margin: 0 0 1.25rem 0;">
-          <button class="auth-tab-btn active" data-tab="login">Email & Password</button>
-          <button class="auth-tab-btn" data-tab="register">Customer Register</button>
-          <button class="auth-tab-btn tab-pin" data-tab="pin">Staff PIN Pad</button>
+          <button type="button" class="auth-tab-btn active" data-tab="login">Email & Password</button>
+          <button type="button" class="auth-tab-btn" data-tab="register">Customer Register</button>
+          <button type="button" class="auth-tab-btn tab-pin" data-tab="pin">Staff PIN Pad</button>
         </div>
 
         <div id="pageAuthAlert" class="auth-alert"></div>
@@ -313,18 +313,18 @@
             </div>
 
             <div class="pin-keypad">
-              <button class="pin-key" data-num="1">1</button>
-              <button class="pin-key" data-num="2">2</button>
-              <button class="pin-key" data-num="3">3</button>
-              <button class="pin-key" data-num="4">4</button>
-              <button class="pin-key" data-num="5">5</button>
-              <button class="pin-key" data-num="6">6</button>
-              <button class="pin-key" data-num="7">7</button>
-              <button class="pin-key" data-num="8">8</button>
-              <button class="pin-key" data-num="9">9</button>
-              <button class="pin-key key-action" id="pPinClearBtn">CLEAR</button>
-              <button class="pin-key" data-num="0">0</button>
-              <button class="pin-key key-action" id="pPinBackspaceBtn">⌫</button>
+              <button type="button" class="pin-key" data-num="1">1</button>
+              <button type="button" class="pin-key" data-num="2">2</button>
+              <button type="button" class="pin-key" data-num="3">3</button>
+              <button type="button" class="pin-key" data-num="4">4</button>
+              <button type="button" class="pin-key" data-num="5">5</button>
+              <button type="button" class="pin-key" data-num="6">6</button>
+              <button type="button" class="pin-key" data-num="7">7</button>
+              <button type="button" class="pin-key" data-num="8">8</button>
+              <button type="button" class="pin-key" data-num="9">9</button>
+              <button type="button" class="pin-key key-action" id="pPinClearBtn">CLEAR</button>
+              <button type="button" class="pin-key" data-num="0">0</button>
+              <button type="button" class="pin-key key-action" id="pPinBackspaceBtn">⌫</button>
             </div>
             <div style="font-size:0.75rem; color:#64748B; text-align:center;">
               Demo PINs: <code>1001</code> (Admin) &bull; <code>2002</code> (Cashier) &bull; <code>3003</code> (Kitchen) &bull; <code>4004</code> (Driver)
@@ -437,9 +437,18 @@
       // 4. 1-Click Role Direct Sign-In Cards
       document.querySelectorAll('.role-card-btn').forEach(btn => {
         btn.addEventListener('click', async (e) => {
-          const email = e.currentTarget.getAttribute('data-email');
-          const pwd = e.currentTarget.getAttribute('data-pwd');
-          const targetUrl = e.currentTarget.getAttribute('data-target');
+          e.preventDefault();
+          const email = btn.getAttribute('data-email');
+          const pwd = btn.getAttribute('data-pwd');
+          const targetUrl = btn.getAttribute('data-target');
+
+          document.querySelectorAll('.role-card-btn').forEach(b => b.classList.remove('active-role-card'));
+          btn.classList.add('active-role-card');
+
+          const emailInput = document.getElementById('pLoginEmail');
+          const pwdInput = document.getElementById('pLoginPassword');
+          if (emailInput) emailInput.value = email;
+          if (pwdInput) pwdInput.value = pwd;
 
           showPageAlert(`Signing in as ${email}...`, 'success');
           const res = await window.OsmanAuth.login(email, pwd);
@@ -452,9 +461,10 @@
               } else {
                 window.location.href = targetUrl;
               }
-            }, 500);
+            }, 300);
           } else {
             showPageAlert(res.error, 'error');
+            btn.classList.remove('active-role-card');
           }
         });
       });

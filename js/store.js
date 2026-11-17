@@ -355,7 +355,7 @@ const SEED_DATA = {
 class StoreManager {
   constructor() {
     this.STORAGE_KEY = 'osman_restaurant_store_v1';
-    this.API_BASE = window.location.origin.includes(':5000') || window.location.port === '5000'
+    this.API_BASE = (window.location.protocol.startsWith('http'))
       ? '' 
       : 'http://localhost:5000';
     this.broadcastChannel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('osman_store_channel') : null;

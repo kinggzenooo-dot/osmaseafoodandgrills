@@ -6,7 +6,8 @@
 
 (function () {
   const AUTH_STORAGE_KEY = 'osman_auth_session_v1';
-  const API_BASE = window.location.origin.includes(':5000') || window.location.port === '5000'
+  // Use relative URL on any hosted web server (Render, localhost, etc.)
+  const API_BASE = window.location.protocol.startsWith('http')
     ? '' 
     : 'http://localhost:5000';
 
@@ -164,22 +165,36 @@
     async login(email, password) {
       email = email.trim().toLowerCase();
       
-      // 1. Try Backend API
+      // 1. Try Backend API with 3.5s timeout for fast responsiveness (handles Render cold starts)
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+
         const resp = await fetch(`${API_BASE}/api/auth/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
+          body: JSON.stringify({ email, password }),
+          signal: controller.signal
         });
+        clearTimeout(timeoutId);
+
         const data = await resp.json();
         if (data.success && data.user) {
           this.saveSession(data.user, data.token);
           return { success: true, user: data.user, message: data.message };
         } else if (resp.status === 401) {
+          // If server returned 401, check if it's one of the demo accounts as fallback
+          const matchedDemo = DEMO_ACCOUNTS.find(a => a.email.toLowerCase() === email && a.password === password);
+          if (matchedDemo) {
+            const userObj = { ...matchedDemo };
+            delete userObj.password;
+            this.saveSession(userObj, 'local-token-' + Date.now());
+            return { success: true, user: userObj, message: `Welcome back, ${userObj.name}!` };
+          }
           return { success: false, error: data.error || 'Invalid email or password' };
         }
       } catch (err) {
-        console.log('Backend API unreachable, using local auth fallback:', err.message);
+        console.log('Backend API unreachable or cold-starting, using local auth fallback:', err.message);
       }
 
       // 2. Local Fallback Verification
@@ -203,7 +218,7 @@
         }
       }
 
-      return { success: false, error: 'Invalid email or password. Try a Demo Account below!' };
+      return { success: false, error: 'Invalid email or password. Try a Demo Account above!' };
     }
 
     // Quick Staff 4-digit PIN Login
@@ -213,20 +228,26 @@
         return { success: false, error: 'Please enter a valid 4-digit PIN' };
       }
 
-      // 1. Try Backend API
+      // 1. Try Backend API with 3.5s timeout
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+
         const resp = await fetch(`${API_BASE}/api/auth/pin-login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ pin })
+          body: JSON.stringify({ pin }),
+          signal: controller.signal
         });
+        clearTimeout(timeoutId);
+
         const data = await resp.json();
         if (data.success && data.user) {
           this.saveSession(data.user, data.token);
           return { success: true, user: data.user, message: data.message };
         }
       } catch (err) {
-        console.log('Backend API unreachable, using local PIN fallback:', err.message);
+        console.log('Backend API unreachable or cold-starting, using local PIN fallback:', err.message);
       }
 
       // 2. Local Fallback PIN verification
